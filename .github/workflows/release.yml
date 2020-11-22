@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # Get short SHA, as github only gives us the full SHA
       - uses: benjlevesque/short-sha@v1.2
