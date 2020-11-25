@@ -61,7 +61,7 @@ jobs:
 
       - name: Build image
         run: |
-          rm -fr output/*/build/piwebcam*
+          # Force a piwebcam rebuild every time
           rm -fr output/*/build/piwebcam*
           sh build-showmewebcam.sh ${{ matrix.raspberry }}
           cp output/${{ matrix.raspberry }}/images/sdcard.img sdcard-${{ matrix.raspberry }}-${{ env.SHA }}.img
