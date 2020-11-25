@@ -33,11 +33,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # Retrieve annotated tags as the checkout above doesn't do this
       - name: Fetch git tag history
         run: |
-          git fetch --prune --tags --force
           echo "SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "GIT_TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           git describe
@@ -60,6 +61,8 @@ jobs:
 
       - name: Build image
         run: |
+          rm -fr output/*/build/piwebcam*
+          rm -fr output/*/build/piwebcam*
           sh build-showmewebcam.sh ${{ matrix.raspberry }}
           cp output/${{ matrix.raspberry }}/images/sdcard.img sdcard-${{ matrix.raspberry }}-${{ env.SHA }}.img
 
