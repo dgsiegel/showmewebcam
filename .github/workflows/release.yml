@@ -39,6 +39,7 @@ jobs:
       # Retrieve annotated tags as the checkout above doesn't do this
       - name: Fetch git tag history
         run: |
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
           echo "SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "GIT_TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           git describe
